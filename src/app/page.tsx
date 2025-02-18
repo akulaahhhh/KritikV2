@@ -22,7 +22,7 @@ export default function Home() {
           Welcome to Kritik Auto
         </h1>
         <Link href="/Scrapper" className="px-8 py-4 mb-9"> {/* Increased bottom margin */}
-          <Button className="px-10 py-7 text-xl " >GET STARTED</Button> {/* Increased font size */}
+          <Button className="px-10 py-7 text-xl font-semibold tracking-wide" >GET STARTED</Button> {/* Increased font size */}
         </Link>
       </div>
 
