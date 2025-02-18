@@ -1,7 +1,9 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
+  env: {
+    BACKEND_API: process.env.BACKEND_API, // Add this line to pass the environment variable
+  },
 };
 
 export default nextConfig;

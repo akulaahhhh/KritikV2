@@ -13,9 +13,11 @@ const WebSocketClient = () => {
   const [logs, setLogs] = useState<string[]>([]);
 
   const ws = useRef<WebSocket | null>(null);
+  const apiUrl = process.env.BACKEND_API;
+  console.log("API URL:", apiUrl);
 
   useEffect(() => {
-    ws.current = new WebSocket("ws://localhost:8000/ws");
+    ws.current = new WebSocket(`${apiUrl}/ws`);
 
     ws.current.onopen = () => console.log("✅ WebSocket connected");
     ws.current.onmessage = (event) => {
