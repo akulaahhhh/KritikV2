@@ -3,7 +3,8 @@
 import { useEffect, useState, useRef } from "react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
+import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '@/components/ui/card';
+import { Lock, Link2, Terminal, Globe } from 'lucide-react';
 import Navbar from "../Navbar";
 
 const WebSocketClient = () => {
@@ -56,42 +57,94 @@ const WebSocketClient = () => {
   };
 
   return (
-    <div className="flex flex-col h-screen dark:bg-gray-900 dark:text-gray-100">
+    <div className="flex flex-col min-h-screen dark:bg-gray-900 dark:text-gray-100">
       <Navbar />
-      <div className="flex items-center justify-center flex-1 p-4">
-        <Card className="w-full max-w-4xl">
-          <CardHeader>
-            <CardTitle className="text-2xl">Kritik Auto</CardTitle>
+      <div className="flex items-center justify-center flex-1 p-6">
+        <Card className="w-full max-w-4xl shadow-xl">
+          <CardHeader className="space-y-4 pb-6">
+            <div className="flex items-center gap-2">
+              <Globe className="h-6 w-6 text-blue-500" />
+              <CardTitle className="text-2xl font-bold">Kritik Auto</CardTitle>
+            </div>
+            <CardDescription className="text-base">
+              Automated web scraping tool for Kritik.com.my | ZOHL Industries
+            </CardDescription>
           </CardHeader>
-          <CardContent className="space-y-4">
-            <div className="w-full space-y-4">
-              <Input
-                type="text"
-                placeholder="WordPress Username"
-                value={username}
-                onChange={(e) => setUsername(e.target.value)}
-              />
-              <Input
-                type="password"
-                placeholder="WordPress Password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-              />
-              <div className="flex gap-2">
-                <Input
-                  className="flex-1"
-                  type="text"
-                  placeholder="Enter news URL"
-                  value={url}
-                  onChange={(e) => setUrl(e.target.value)}
-                />
-                <Button onClick={sendRequest}>GO</Button>
+
+          <CardContent className="space-y-6">
+            {/* Credentials Section */}
+            <div className="space-y-4">
+              <h3 className="text-sm font-medium text-gray-500 dark:text-gray-400">
+                WordPress Credentials
+              </h3>
+              <div className="grid gap-4 md:grid-cols-2">
+                <div className="relative">
+                  <Input
+                    type="text"
+                    placeholder="WordPress Username"
+                    value={username}
+                    onChange={(e) => setUsername(e.target.value)}
+                    className="pl-10"
+                  />
+                  <Lock className="absolute left-3 top-2.5 h-5 w-5 text-gray-400" />
+                </div>
+                <div className="relative">
+                  <Input
+                    type="password"
+                    placeholder="WordPress Password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    className="pl-10"
+                  />
+                  <Lock className="absolute left-3 top-2.5 h-5 w-5 text-gray-400" />
+                </div>
               </div>
             </div>
-            <div className="rounded-lg border p-3 h-96 overflow-auto bg-gray-50 dark:bg-gray-800">
-              {logs.map((log, index) => (
-                <p key={index} className="text-sm">{log}</p>
-              ))}
+
+            {/* URL Input Section */}
+            <div className="space-y-4">
+              <h3 className="text-sm font-medium text-gray-500 dark:text-gray-400">
+                Target URL
+              </h3>
+              <div className="flex gap-3">
+                <div className="relative flex-1">
+                  <Input
+                    type="text"
+                    placeholder="Enter news URL to scrape"
+                    value={url}
+                    onChange={(e) => setUrl(e.target.value)}
+                    className="pl-10"
+                  />
+                  <Link2 className="absolute left-3 top-2.5 h-5 w-5 text-gray-400" />
+                </div>
+                <Button 
+                  onClick={sendRequest}
+                  size="lg"
+                  className="px-8 "
+                >
+                  Start Scraping
+                </Button>
+              </div>
+            </div>
+
+            {/* Logs Section */}
+            <div className="space-y-4">
+              <div className="flex items-center gap-2">
+                <Terminal className="h-5 w-5 text-gray-500" />
+                <h3 className="text-sm font-medium text-gray-500 dark:text-gray-400">
+                  Process Logs
+                </h3>
+              </div>
+              <div className="rounded-lg border bg-gray-50 dark:bg-gray-800 p-4 h-80 overflow-auto font-mono">
+                {logs.map((log, index) => (
+                  <p 
+                    key={index} 
+                    className="text-sm text-gray-600 dark:text-gray-300 py-0.5"
+                  >
+                    {log}
+                  </p>
+                ))}
+              </div>
             </div>
           </CardContent>
         </Card>
