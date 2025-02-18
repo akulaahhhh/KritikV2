@@ -14,7 +14,7 @@ import {
 
 export default function Home() {
   return (
-    <div className="flex flex-col h-screen dark:bg-gray-900 dark:text-gray-100">
+    <div className="flex flex-col  dark:bg-gray-900 dark:text-gray-100">
       <Navbar />
       <div className="flex items-center justify-center flex-1 flex-col">
       <div className="my-36 text-center"> {/* Increased margin */}
